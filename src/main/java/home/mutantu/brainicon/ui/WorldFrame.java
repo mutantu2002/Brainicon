@@ -3,12 +3,11 @@ package home.mutantu.brainicon.ui;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import home.mutantu.brainicon.model.Constants;
-import home.mutantu.brainicon.model.KeyboardState;
-import home.mutantu.brainicon.model.Columnocon;
-import home.mutantu.brainicon.model.Neurocon;
-import home.mutantu.brainicon.model.BrainWorld;
 import javax.swing.JFrame;
+
+import home.mutantu.brainicon.model.BrainWorld;
+import home.mutantu.brainicon.model.Columnocon;
+import home.mutantu.brainicon.model.KeyboardState;
 
 @SuppressWarnings("serial")
 public class WorldFrame extends JFrame implements KeyListener
@@ -38,28 +37,7 @@ public class WorldFrame extends JFrame implements KeyListener
 		drawingPanel.empty();
 		for (Columnocon obj : world.getObjects())
 		{
-			if (obj.controllable)
-			{
-				int center=0;
-				for (Neurocon point : obj.getPoints())
-				{
-					center += (int)point.t0.x - viewportX;
-				}
-				center/=obj.getPoints().size();
-				if (center<Constants.MARGIN)
-				{
-					viewportX+=center-Constants.MARGIN;
-				}
-				if (center>width-Constants.MARGIN)
-				{
-					viewportX+=center-width+Constants.MARGIN;
-				}
-			}
-			
-			for (Neurocon point : obj.getPoints())
-			{
-				drawingPanel.set4Pixels((int)point.t0.x, (int)point.t0.y, viewportX);
-			}
+			drawingPanel.drawSpins(obj.spins);
 		}
 		repaint();
 	}

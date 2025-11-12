@@ -46,14 +46,6 @@ public class BrainWorld implements Serializable
 			objects.add(rubberObject);
 		}
 	}
-	
-	public void flipCoordinates()
-	{
-		for (Columnocon obj : objects) 
-		{
-			obj.flipCoordinates();
-		}		
-	}
 
 	public double getWidth()
 	{

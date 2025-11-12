@@ -1,6 +1,4 @@
 package home.mutantu.brainicon.ui;
-import home.mutantu.brainicon.model.Neurocon;
-
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
@@ -9,7 +7,6 @@ import java.awt.image.DataBufferInt;
 import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
 import java.util.Arrays;
-import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -77,23 +74,16 @@ public class RasterPanel extends JPanel
 		pixels[index] = 0xFF000000;
 		pixels[(index+1)] = 0xFF000000;
 	}
-	
-	public void drawObjectContour(List<Neurocon> points, int x0)
-	{
-		if (points == null || points.size()<2) return;
-		Graphics g = image.getGraphics();
-		int size = points.size();
-		Neurocon point = points.get(0);
-		Neurocon nextPoint = points.get(size-1);
-		g.drawLine((int)point.t0.x-x0, (int)point.t0.y, (int)nextPoint.t0.x-x0, (int)nextPoint.t0.y);
-		for (int index=0;index<size-1;index++)
-		{
-			point = points.get(index);
-			nextPoint = points.get(index+1);
-			g.drawLine((int)point.t0.x-x0, (int)point.t0.y, (int)nextPoint.t0.x-x0, (int)nextPoint.t0.y);
+
+	public void drawSpins(byte[][] spins) {
+		for (int i=0;i<spins.length;i++){
+			for (int j=0;j<spins[0].length;j++){
+				if (spins[i][j]==1){
+					int index= (width)*j+i ;
+					pixels[index] = 0xFF000000;
+				}
+			}
 		}
-		
-		g.dispose();
 	}
 
 }

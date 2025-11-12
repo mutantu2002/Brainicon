@@ -4,13 +4,13 @@ import home.mutantu.brainicon.model.Constants;
 import home.mutantu.brainicon.model.BrainWorld;
 import home.mutantu.brainicon.ui.WorldFrame;
 
-public class BrainRunner implements Runnable
+public class FrameRunner implements Runnable
 {
 	BrainWorld world;
 	WorldFrame frame;
 	private boolean running = true;
 	
-	public BrainRunner(BrainWorld world,WorldFrame frame)
+	public FrameRunner(BrainWorld world,WorldFrame frame)
 	{
 		this.world = world;
 		this.frame = frame;
@@ -30,7 +30,7 @@ public class BrainRunner implements Runnable
 				{
 				}
 			}
-			world.next(frame.keyboardState);
+			frame.buildFrame(world);
 		}
 	}
 
